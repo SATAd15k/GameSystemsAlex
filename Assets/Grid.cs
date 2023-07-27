@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    private void OnGUI() // This creates a canvas which GUI items need to be nested into in order to render
+    public bool toggleExample;
+
+    void OnGUI() // This creates a canvas which GUI items need to be nested into in order to render
     {
         /* 
         This is a GUI element that is type "box" aka Canvas Image
@@ -27,7 +29,16 @@ public class Grid : MonoBehaviour
         // This new GUI.Box doesnt need to have width and height as well as box sizes as it has been defined globally / top level
 
         GUI.Box(new Rect(ScreenPlacement(2.5f, 3, 2, 4)), "helloz");
-        LessonGrid();
+        if (toggleExample)
+        {
+            LessonGrid();
+        }
+
+
+        if (GUI.Button(new Rect(ScreenPlacement(0, 3, 1, 1)), ""))
+        {
+            toggleExample = !toggleExample;
+        }
     }
 
     // This is known as a method which does not have a return type; doesnt have to give values will run top to bottom
@@ -45,6 +56,7 @@ public class Grid : MonoBehaviour
             {
                 GUI.Box(new Rect(ScreenPlacement(x, y, 1, 1)), "");
                 GUI.Label(new Rect(ScreenPlacement(x, y, 1, 1)), x + ":" + y);
+
             }
         }
     }
@@ -52,7 +64,7 @@ public class Grid : MonoBehaviour
     public Rect ScreenPlacement(float startPosX, float startPosY, float sizeX, float sizeY)
     {
         // Defining how Rect scaling values sit when called in other nested scripts as this is top level *GOD SCRIPT*
-        Rect placement = new Rect(startPosX*Screen.width / 16, startPosY*Screen.height / 9, sizeX*Screen.width / 16, sizeY*Screen.height / 9);
+        Rect placement = new Rect(startPosX * Screen.width / 16, startPosY * Screen.height / 9, sizeX * Screen.width / 16, sizeY * Screen.height / 9);
         return placement;
 
         // In this case it will return value a new rectangle which will be defined by the values above
